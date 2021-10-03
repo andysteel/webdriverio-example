@@ -1,0 +1,10 @@
+*********************WEBDRIVERIO*******************
+
+#install the cli
+$ npm i @wdio/cli
+
+#initial configuration
+$ npx wdio config
+
+#To run your tests, execute:
+$ npx wdio run wdio.conf.ts
