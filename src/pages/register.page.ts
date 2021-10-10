@@ -1,3 +1,4 @@
+import { click, selectByText, selectOnMultiple, setStringValue } from "../utils/commands";
 import Page from "./page";
 
 class ChaiRegister extends Page {
@@ -17,56 +18,45 @@ class ChaiRegister extends Page {
 
     private get btnSubmit() { return $('#submit')}
 
-    
-    async selectOnMultiple(elementArray: Promise<ElementArrayImport>, value: string) {
-
-        (await elementArray).forEach(async element => {
-            const elementValue = await element.getAttribute('value');
-            if(elementValue === value) {
-                await element.click();
-                return;
-            }
-        });
-    }
 
     getHeader() {
         return this.header;
     }
 
     async enterFirstName(fname: string) {
-        await this.firstname.setValue(fname);
+        await setStringValue(await this.firstname, fname);
     }
 
     async enterLastName (lname: string) {
-        await this.lastname.setValue(lname);
+        await setStringValue(await this.lastname, lname);
     }
 
     async selectGender(gender: string) {
-        await this.selectOnMultiple(this.gender_radio, gender);
+        await selectOnMultiple(this.gender_radio, gender);
     }
 
     async selectExperience(years: string) {
-        await this.selectOnMultiple(this.experience_radio, years);
+        await selectOnMultiple(this.experience_radio, years);
     }
 
     async selectFavChai(chaiType: string) {
-        await this.selectOnMultiple(this.favchai_checkbox, chaiType);
+        await selectOnMultiple(this.favchai_checkbox, chaiType);
     }
 
     async selectReason(reason: string) {
-        await this.selectOnMultiple(this.whychai_checkbox, reason);
+        await selectOnMultiple(this.whychai_checkbox, reason);
     }
 
     async selectContinent(continent: string) {
-        await this.continent_dropdown.selectByVisibleText(continent);
+        await selectByText(await this.continent_dropdown, continent);
     }
 
     async selectSeleniumContact(command: string) {
-        await this.commands_multiselect.selectByVisibleText(command);
+        await selectByText(await this.commands_multiselect, command);
     }
 
     async clickOnSubmitBtn() {
-        await this.btnSubmit.click();
+        await click(await this.btnSubmit);
     }
 }
 
