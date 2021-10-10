@@ -8,34 +8,33 @@ Given(/^I am on practice page \"([^\"]*)\"$/, async function (appurl: string) {
 
 Then(/^I validate page header \"([^\"]*)\"$/, async function (headertext: string) {
 
-    await  expect(chaiPage.header).toHaveText(headertext);
+    await  expect(chaiPage.getHeader()).toHaveText(headertext);
 });
 
 When(/^I enter firstname (.+) and (.+)$/, async function (fname: string, lname: string) {
 
-    await chaiPage.firstname.setValue(fname);
-    await chaiPage.lastname.setValue(lname);
+    await chaiPage.enterFirstName(fname);
+    await chaiPage.enterLastName(lname);
 
-    await expect(chaiPage.firstname).toHaveValue(fname);
 });
 
 When(/^I select gender (.+) years (.+) favorite chai (.+) and (.+)$/, async function (gender: string, yrs: string, favchai: string, reason: string) {
 
-    await chaiPage.selectOnMultiple(chaiPage.gender_radio, gender);
-    await chaiPage.selectOnMultiple(chaiPage.experience_radio, yrs);
-    await chaiPage.selectOnMultiple(chaiPage.favchai_checkbox, favchai);
-    await chaiPage.selectOnMultiple(chaiPage.whychai_checkbox, reason);
+    await chaiPage.selectGender(gender);
+    await chaiPage.selectExperience(yrs);
+    await chaiPage.selectFavChai(favchai);
+    await chaiPage.selectReason(reason);
 
 });
 
 When(/^I select continent (.+) and commands (.+)$/, async function (continent: string, command: string) {
 
-    await chaiPage.continent_dropdown.selectByVisibleText(continent);
-    await chaiPage.commands_multiselect.selectByVisibleText(command);
+    await chaiPage.selectContinent(continent);
+    await chaiPage.selectSeleniumContact(command);
 
     browser.pause(5000);
 });
 
 When(/^I click on submit button$/, async function () {
-    await chaiPage.btnSubmit.click();
+    await chaiPage.clickOnSubmitBtn();
 });
