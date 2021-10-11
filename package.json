@@ -16,6 +16,7 @@
     "@wdio/cli": "^7.14.0"
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.11",
     "@wdio/allure-reporter": "^7.13.2",
     "@wdio/cucumber-framework": "^7.13.2",
     "@wdio/junit-reporter": "^7.13.2",
@@ -23,6 +24,7 @@
     "@wdio/selenium-standalone-service": "^7.13.2",
     "@wdio/spec-reporter": "^7.13.2",
     "chromedriver": "^94.0.0",
+    "supertest": "^6.1.6",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3",
     "wdio-chromedriver-service": "^7.2.2"

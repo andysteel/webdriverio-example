@@ -22,7 +22,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './test/features/**/register.feature'
+        './test/features/**/E2E_user.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -74,7 +74,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'error',
     //
     // Set specific log levels per logger
     // loggers:
