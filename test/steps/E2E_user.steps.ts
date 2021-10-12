@@ -2,12 +2,17 @@ import { Given, When, Then } from "@wdio/cucumber-framework";
 import userPage from '../../src/pages/users.page';
 import { BASE_URI } from '../../src/config/APIConfig';
 import supertest from 'supertest';
+import { ApiCalls } from "../../src/enums/ApiCalls";
 
 const request = supertest(BASE_URI);
-let apiResponse: any;
-let apiStatusCode: number;
+let response: supertest.Response;
 
-Given(/^I am on a page (.+)$/, async function (pageurl: string) {
+const payload = {
+    'name': 'sadab',
+    'job': 'tester'
+}
+
+Given(/^I am on page (.+)$/, async function (pageurl: string) {
     await userPage.openApp(pageurl);
 });
 
@@ -17,17 +22,40 @@ When(/^I perform (.+) user search$/, async function (endpointurl: string) {
 });
 
 When(/^I make get (.+) api call$/, async function (endpointurl: string ) {
-    const response =  await request.get(endpointurl);
-
-    apiResponse = response.body
-    apiStatusCode = response.statusCode
+    response =  await request.get(endpointurl);
 });
 
 Then(/^I validate the search result$/, async function () {
     const ui_status = await userPage.getStatusText();
     const ui_response = JSON.parse(await userPage.getOutputText());
 
-    expect(ui_status).toContain(apiStatusCode.toString());
-    expect(ui_response).toEqual(apiResponse);
-    expect(ui_response.data.email).toEqual(apiResponse.data.email);
+    expect(ui_status).toContain(response.statusCode.toString());
+    expect(ui_response).toEqual(response.body);
+    expect(ui_response.data.email).toEqual(response.body.data.email);
 });
+
+When(/^I perform create use search for api (.+)$/, async (service: string) => {
+    await userPage.selectMethod(ApiCalls.POST);
+    await userPage.enterApiUrl(BASE_URI + service);
+    await userPage.clickOnAddParamBtn();
+    await userPage.enterFirstParams("name", payload.name);
+    await userPage.clickOnAddParamBtn();
+    await userPage.enterSecondParams("job", payload.job);
+    await userPage.clickOnAjaxBtn();
+})
+
+When(/^I make post (.+) api call$/, async (endpoint: string) => {
+
+    response = await request
+                    .post(endpoint)
+                    .send(payload)
+                    .set('content-type', 'application/json');
+})
+
+Then(/^I validate the create user search result$/, async () => {
+    const ui_status = await userPage.getStatusText();
+    const ui_response = JSON.parse(await userPage.getOutputText());
+
+    expect(ui_status).toContain(response.statusCode.toString());
+    expect(ui_response.name).toEqual(response.body.name);
+})

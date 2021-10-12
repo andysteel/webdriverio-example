@@ -7,4 +7,8 @@ $ npm i @wdio/cli
 $ npx wdio config
 
 #To run your tests, execute:
-$ npx wdio run wdio.conf.ts
+$ npx wdio wdio.conf.ts
+
+#Example to run specific cucumber tags:
+$ npx wdio wdio.conf.ts "--cucumberOpts.tagExpression=@Andysteel"
+$ npm test -- --cucumberOpts.tagExpression='@Andysteel'

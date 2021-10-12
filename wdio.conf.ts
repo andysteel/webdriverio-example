@@ -22,7 +22,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './test/features/**/E2E_user.feature'
+        './test/features/**/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -136,7 +136,7 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec','junit',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
 
 
     //
