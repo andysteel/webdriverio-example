@@ -7,6 +7,7 @@
             "expect-webdriverio"
         ],
         "target": "ES5",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "baseUrl": "."
     }
 }

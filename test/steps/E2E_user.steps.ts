@@ -1,8 +1,8 @@
 import { Given, When, Then } from "@wdio/cucumber-framework";
-import userPage from '../../src/pages/users.page';
-import { BASE_URI } from '../../src/config/APIConfig';
+import userPage from 'src/pages/users.page';
+import { BASE_URI } from 'src/config/APIConfig';
 import supertest from 'supertest';
-import { ApiCalls } from "../../src/enums/ApiCalls";
+import { ApiCalls } from 'src/enums/ApiCalls';
 
 const request = supertest(BASE_URI);
 let response: supertest.Response;

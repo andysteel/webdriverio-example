@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import chaiPage from '../../src/pages/register.page';
+import chaiPage from 'src/pages/register.page';
 
 Given(/^I am on practice page \"([^\"]*)\"$/, async function (appurl: string) {
     await browser.url(appurl);

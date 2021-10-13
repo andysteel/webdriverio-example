@@ -1,4 +1,4 @@
-import { click, selectByText, selectOnMultiple, setStringValue } from "../utils/commands";
+import { click, selectByText, selectOnMultiple, setStringValue } from "src/utils/commands";
 import Page from "./page";
 
 class ChaiRegister extends Page {

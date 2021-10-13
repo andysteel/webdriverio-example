@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber'
-import waitexpage from '../../src/pages/waitex.page'
+import waitexpage from 'src/pages/waitex.page'
 
 Given(/^I am on dynamic loading (.+) page$/, async (appurl: string) => {
     await browser.maximizeWindow()
