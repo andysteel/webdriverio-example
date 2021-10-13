@@ -30,11 +30,11 @@ class UsersPage extends Page {
     }
 
     async enterApiUrl(apiEndpoint: string) {
-        await setStringValue(await this.url_textbox, apiEndpoint);
+        await setStringValue(this.url_textbox, apiEndpoint);
     }
 
     async clickOnAjaxBtn() {
-        await click(await this.ajax_btn);
+        await click(this.ajax_btn);
     }
 
     async getStatusText(): Promise<string> {
@@ -47,21 +47,21 @@ class UsersPage extends Page {
     }
 
     async selectMethod(apiType: ApiCalls) {
-        await selectByText( await this.method_dropdown, apiType)
+        await selectByText(this.method_dropdown, apiType)
     }
 
     async clickOnAddParamBtn() {
-        await click(await this.addParam_Btn)
+        await click(this.addParam_Btn)
     }
 
     async enterFirstParams(key: string, value:string) {
-        await setStringValue(await this.paramName1_textbox, key)
-        await setStringValue(await this.paramValue1_textbox, value)
+        await setStringValue(this.paramName1_textbox, key)
+        await setStringValue(this.paramValue1_textbox, value)
     }
 
     async enterSecondParams(key: string, value:string) {
-        await setStringValue(await this.paramName2_textbox, key)
-        await setStringValue(await this.paramValue2_textbox, value)
+        await setStringValue(this.paramName2_textbox, key)
+        await setStringValue(this.paramValue2_textbox, value)
     }
 }
 

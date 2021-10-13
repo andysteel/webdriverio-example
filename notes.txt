@@ -19,3 +19,19 @@ $ NODE_ENV=DEV npm test
 
 WINDOWS
 $ set NODE_ENV=DEV && npm test
+
+#Upgrade packages
+$ npm i -g npm-check-updates
+
+To see all dependencies that need Upgrade
+$ ncu
+
+To change the versions
+$ ncu -u
+
+To install new versions
+$ npm install
+
+#Example to run specific cucumber tests via command line
+$ npx wdio wdio.conf.ts "--spec" "./test/features/waitex.feature"
+$ npm test -- --spec ./test/features/waitex.feature

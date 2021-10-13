@@ -24,11 +24,11 @@ class ChaiRegister extends Page {
     }
 
     async enterFirstName(fname: string) {
-        await setStringValue(await this.firstname, fname);
+        await setStringValue(this.firstname, fname);
     }
 
     async enterLastName (lname: string) {
-        await setStringValue(await this.lastname, lname);
+        await setStringValue(this.lastname, lname);
     }
 
     async selectGender(gender: string) {
@@ -48,15 +48,15 @@ class ChaiRegister extends Page {
     }
 
     async selectContinent(continent: string) {
-        await selectByText(await this.continent_dropdown, continent);
+        await selectByText(this.continent_dropdown, continent);
     }
 
     async selectSeleniumContact(command: string) {
-        await selectByText(await this.commands_multiselect, command);
+        await selectByText(this.commands_multiselect, command);
     }
 
     async clickOnSubmitBtn() {
-        await click(await this.btnSubmit);
+        await click(this.btnSubmit);
     }
 }
 
