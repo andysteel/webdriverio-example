@@ -37,6 +37,10 @@ export const config: WebdriverIO.Config = {
     exclude: [
         // 'path/to/excluded/files'
     ],
+    suites: {
+        smoke: ['./test/features/smoke/*.feature'],
+        regression: ['./test/features/regression/*.feature']
+    },
     //
     // ============
     // Capabilities
@@ -71,7 +75,7 @@ export const config: WebdriverIO.Config = {
         // excludeDriverLogs: ['bugreport', 'server'],
     //},
     {
-        maxInstances: 5,
+        maxInstances: 1,
         browserName: 'firefox',
         acceptInsecureCerts: true
     }
