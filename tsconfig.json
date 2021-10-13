@@ -8,6 +8,7 @@
         ],
         "target": "ES5",
         "esModuleInterop": true,
-        "baseUrl": "."
+        "baseUrl": ".",
+        "resolveJsonModule": true
     }
 }
