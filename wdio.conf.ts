@@ -1,4 +1,5 @@
-import { setEnv } from "./src/config/EnvConfig"
+import { setEnv } from "./src/config/EnvConfig";
+import path from 'path';
 
 const appBaseUrl = setEnv();
 
@@ -69,6 +70,11 @@ export const config: WebdriverIO.Config = {
         //
         //browserName: 'chrome',
         //acceptInsecureCerts: true,
+        //"goog:chromeOptions": {
+        //    "prefs": {
+        //        "download.default_directory": path.join(process.cwd(), 'downloads')
+        //    }
+        //}
 
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -77,7 +83,15 @@ export const config: WebdriverIO.Config = {
     {
         maxInstances: 1,
         browserName: 'firefox',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        "moz:firefoxOptions": {
+            "prefs": {
+                "browser.download.folderList": 2,
+                "browser.download.dir": path.join(process.cwd(), 'downloads'),
+                "browser.helperApps.neverAsk.saveToDisk": "image/jpg, application/txt, application/pdf, image/png, application/json, image/jpeg",
+                "browser.download.manager.showWhenStarting": false
+            }
+        }
     }
     ],
     //
