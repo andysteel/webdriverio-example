@@ -12,3 +12,10 @@ $ npx wdio wdio.conf.ts
 #Example to run specific cucumber tags:
 $ npx wdio wdio.conf.ts "--cucumberOpts.tagExpression=@Andysteel"
 $ npm test -- --cucumberOpts.tagExpression='@Andysteel'
+
+#Example to pass environments variable in command line
+UNIX
+$ NODE_ENV=DEV npm test
+
+WINDOWS
+$ set NODE_ENV=DEV && npm test
