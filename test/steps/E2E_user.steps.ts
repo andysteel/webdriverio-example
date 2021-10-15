@@ -3,6 +3,7 @@ import userPage from 'src/pages/users.page';
 import { BASE_URI } from 'src/config/APIConfig';
 import supertest from 'supertest';
 import { ApiCalls } from 'src/enums/ApiCalls';
+import assertions from 'src/utils/assertions';
 
 const request = supertest(BASE_URI);
 let response: supertest.Response;
@@ -29,9 +30,10 @@ Then(/^I validate the search result$/, async function () {
     const ui_status = await userPage.getStatusText();
     const ui_response = JSON.parse(await userPage.getOutputText());
 
-    expect(ui_status).toContain(response.statusCode.toString());
-    expect(ui_response).toEqual(response.body);
-    expect(ui_response.data.email).toEqual(response.body.data.email);
+    assertions.toContain(ui_status, response.statusCode.toString());
+    assertions.toEqual(ui_response, response.body);
+    assertions.toEqual(ui_response.data.email, response.body.data.email);
+
 });
 
 When(/^I perform create use search for api (.+)$/, async (service: string) => {
@@ -56,6 +58,6 @@ Then(/^I validate the create user search result$/, async () => {
     const ui_status = await userPage.getStatusText();
     const ui_response = JSON.parse(await userPage.getOutputText());
 
-    expect(ui_status).toContain(response.statusCode.toString());
-    expect(ui_response.name).toEqual(response.body.name);
+    assertions.toContain(ui_status, response.statusCode.toString());
+    assertions.toEqual(ui_response.name, response.body.name);
 })

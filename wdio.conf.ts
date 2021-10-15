@@ -1,5 +1,7 @@
 import { setEnv } from "./src/config/EnvConfig";
 import path from 'path';
+import fileUtils from './src/utils/fileutils';
+import report from '@wdio/allure-reporter';
 
 const appBaseUrl = setEnv();
 
@@ -234,8 +236,9 @@ export const config: WebdriverIO.Config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function (config, capabilities) {
+        fileUtils.deleteDirectory('allure-results');
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -330,8 +333,10 @@ export const config: WebdriverIO.Config = {
      * @param {String}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // afterFeature: function (uri, feature) {
-    // },
+    afterFeature: function (uri, feature) {
+        report.addEnvironment('Platform', process.platform);
+        report.addIssue('http://endereco.issue.com/29434/blablablabla');
+    },
     
     /**
      * Runs after a WebdriverIO command gets executed

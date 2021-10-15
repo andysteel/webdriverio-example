@@ -1,9 +1,12 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
 import chaiPage from 'src/pages/register.page';
+import { addLog } from 'src/utils/commands';
 
 Given(/^I am on practice page \"([^\"]*)\"$/, async function (appurl: string) {
     await browser.url(appurl);
+    addLog(`Loading url ${appurl}`);
     await browser.maximizeWindow();
+    addLog('Maximize window');
 });
 
 Then(/^I validate page header \"([^\"]*)\"$/, async function (headertext: string) {

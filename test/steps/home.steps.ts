@@ -1,4 +1,5 @@
 import { Given, Then } from '@wdio/cucumber-framework';
+import assertions from 'src/utils/assertions';
 
 Given(/^I open the browser and load the url (.+)$/, async function(homeurl) {
     console.log('ENTROU !!!!');
@@ -7,6 +8,6 @@ Given(/^I open the browser and load the url (.+)$/, async function(homeurl) {
 });
 
 Then(/^I should see a header with text (.+)$/, async  function(headerText) {
-    const header = await $('.heading');
-    expect(await header.getText()).toEqual(headerText);
+    const header = $('.heading');
+    await assertions.toHaveText(header, headerText);
 });
