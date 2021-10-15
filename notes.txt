@@ -33,5 +33,5 @@ To install new versions
 $ npm install
 
 #Example to run specific cucumber tests via command line
-$ npx wdio wdio.conf.ts "--spec" "./test/features/waitex.feature"
-$ npm test -- --spec ./test/features/waitex.feature
+$ npx wdio wdio.conf.ts "--spec" "./test/features/regression/waitex.feature"
+$ npm test -- --spec ./test/features/regression/waitex.feature

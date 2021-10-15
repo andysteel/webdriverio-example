@@ -65,34 +65,47 @@ export const config: WebdriverIO.Config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-    //{
-        //maxInstances: 5,
-        //
-        //browserName: 'chrome',
-        //acceptInsecureCerts: true,
-        //"goog:chromeOptions": {
-        //    "prefs": {
-        //        "download.default_directory": path.join(process.cwd(), 'downloads')
-        //    }
-        //}
-
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    //},
-    {
-        maxInstances: 1,
-        browserName: 'firefox',
-        acceptInsecureCerts: true,
-        "moz:firefoxOptions": {
-            "prefs": {
-                "browser.download.folderList": 2,
-                "browser.download.dir": path.join(process.cwd(), 'downloads'),
-                "browser.helperApps.neverAsk.saveToDisk": "image/jpg, application/txt, application/pdf, image/png, application/json, image/jpeg",
-                "browser.download.manager.showWhenStarting": false
+        {
+            maxInstances: 1,
+            browserName: 'chrome',
+            acceptInsecureCerts: true,
+            "goog:chromeOptions": {
+                "prefs": {
+                    "download.default_directory": path.join(process.cwd(), 'downloads')
+                },
+                "args": ['headless', 'disable-gpu']           
             }
-        }
-    }
+        },
+        {
+            maxInstances: 1,
+            browserName: 'firefox',
+            acceptInsecureCerts: true,
+            "moz:firefoxOptions": {
+                "prefs": {
+                    "browser.download.folderList": 2,
+                    "browser.download.dir": path.join(process.cwd(), 'downloads'),
+                    "browser.helperApps.neverAsk.saveToDisk": "application/zip,application/octet-stream,application/x-zip-compressed,multipart/x-zip,image/jpg,application/txt,application/pdf,image/png,application/json,image/jpeg",
+                    "browser.download.manager.showWhenStarting": false,
+                    "browser.helperApps.alwaysAsk.force": false,
+                    "browser.download.manager.focusWhenStarting": false,
+                    "browser.download.manager.useWindow": false,
+                    "browser.download.manager.showAlertOnComplete": false
+                },
+                "args": ['--headless']
+            }
+        },
+        //run on windows
+        // {
+        //     maxInstances: 1,
+        //     browserName: 'MicrosoftEdge',
+        //     acceptInsecureCerts: true,
+        //     "ms:edgeOptions": {
+        //         "prefs": {
+        //             "download.default_directory": path.join(process.cwd(), 'downloads')
+        //         },              
+        //         "args": ['headless', 'disable-gpu']
+        //     }
+        // }
     ],
     //
     // ===================
@@ -163,7 +176,18 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: [
+        'spec',
+        [
+            'allure', 
+            {
+                outputDir: 'allure-results',
+                disableWebdriverStepsReporting: true,
+                disableWebdriverScreenshotsReporting: false,
+                useCucumberStepReporter: true
+            }
+        ]
+    ],
 
 
     //
@@ -283,8 +307,12 @@ export const config: WebdriverIO.Config = {
      * @param {string}             result.error    error stack if scenario failed
      * @param {number}             result.duration duration of scenario in milliseconds
      */
-    // afterStep: function (step, scenario, result) {
-    // },
+    afterStep: async function (step, scenario, result) {
+        //example to take screenshot
+        if(result.passed) {
+            await browser.takeScreenshot();
+        }
+    },
     /**
      *
      * Runs before a Cucumber Scenario.

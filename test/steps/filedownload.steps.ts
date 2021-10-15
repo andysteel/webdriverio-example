@@ -7,11 +7,11 @@ import fileUtils from "src/utils/fileutils";
 When(/^I click on first file$/, async ()=> {
     const fileElement = $("//a[contains(@href, 'download')]");
     await fileElement.click();
-    await browser.pause(6000)
+    await browser.pause(8000);
 })
 
 Then(/^I validate downloaded file extension$/, async ()=> {
-    const extensions = ['.jpg', '.txt', '.pdf', '.png', '.json', '.jpeg']
+    const extensions = ['.jpg', '.txt', '.pdf', '.png', '.json', '.jpeg', '.zip']
     const files = fs.readdirSync(DOWNLOAD_FOLDER_PATH)
     files.forEach(file => {
         expect(extensions).toContain(path.extname(file))
